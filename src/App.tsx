@@ -1,4 +1,3 @@
-import SetBoard from './board/SetBoard'
 import './App.css'
 import SinglePlayer from './layout/SinglePlayer'
 

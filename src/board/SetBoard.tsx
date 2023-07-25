@@ -15,7 +15,6 @@ export default function SetBoard(props: Props) {
     let [board,             setBoard] =             useState<(SetCardModel | null)[]>([]);
     let [selectedCards,     setSelectedCards] =     useState<(SetCardModel)[]>([]);
     let [selectedIndices,   setSelectedIndices] =   useState<(number)[]>([]);
-    let [gameInProgress,    setGameInProgress] =    useState<boolean>(false);
 
     const handledSelectedCard = (card: SetCardModel) => {
         if(selectedCards.length === 2) {
@@ -35,9 +34,6 @@ export default function SetBoard(props: Props) {
     useEffect(() => {
         props.onCardsLeft(game.cardsLeftInDeck())
         setBoard(game.getBoard());
-        if(!game.validateBoard()) {
-            setGameInProgress(false);
-        }
     }, [board])
 
     return (
