@@ -1,11 +1,12 @@
 import './App.css'
-import SinglePlayer from './layout/SinglePlayer'
+import SinglePlayer from './components/layout/SinglePlayer'
+import Title from './components/common/Title'
 
 function App() {
-  	return (<div className='margin-auto'>
-		<div className='font-extralight tracking-wider from-stone-700 text-9xl mb-10'>SET!</div>
+  	return (<>
+		<Title title='SET!'/>
 		<SinglePlayer/>
-	</div>
+	</>
   	)
 }
 

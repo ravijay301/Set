@@ -1,5 +1,5 @@
-import { SetCardModel } from "../models/setCard";
-import SetGame from "../models/setGame";
+import { SetCardModel } from "../../models/setCard";
+import SetGame from "../../models/setGame";
 import SetCard from "./SetCard";
 import { useEffect , useState } from "react";
 
@@ -17,6 +17,12 @@ export default function SetBoard(props: Props) {
     let [selectedIndices,   setSelectedIndices] =   useState<(number)[]>([]);
 
     const handledSelectedCard = (card: SetCardModel) => {
+        let index = SetGame.indexOfCard(card, selectedCards)
+        if(index !== -1) {
+            setSelectedCards(selectedCards => selectedCards.filter((_, i) => i !== index))
+            setSelectedIndices(selectedIndices => selectedIndices.filter((_, i) => i !== index))
+            return
+        }
         if(selectedCards.length === 2) {
             if(game.submitSet(selectedCards[0], selectedCards[1], card)) {
                 props.increaseScore()
@@ -38,10 +44,10 @@ export default function SetBoard(props: Props) {
 
     return (
         <>
-            <div className='grid grid-cols-3 gap-x-1 w-[60rem] relative'>
+            <div className='grid grid-cols-3 gap-x-1 w-[60.4rem] relative'>
                 {board.map((card, index) => {
-                    return <div className={`m-4 ${selectedIndices.indexOf(index) !== -1 ? 'border-2 border-yellow-200': ''}`} key={index}>
-                        {card ? <SetCard key={index} card={card} onCardSelection={handledSelectedCard}/> : <div></div>}
+                    return <div className={`m-4`} key={index}>
+                        {card ? <SetCard key={index} card={card} selected={selectedIndices.indexOf(index) !== -1} onCardSelection={handledSelectedCard}/> : <div></div>}
                     </div>
                 })}
             </div>

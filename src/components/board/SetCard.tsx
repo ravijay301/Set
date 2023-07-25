@@ -1,13 +1,15 @@
-import { SetCardColor, SetCardModel, SetCardShading, SetCardShape } from "../models/setCard";
+import { SetCardColor, SetCardModel, SetCardShading, SetCardShape } from "../../models/setCard";
 
 interface Props {
     card: SetCardModel
-    onCardSelection: (card: SetCardModel) => void
+    selected?: boolean
+    onCardSelection?: (card: SetCardModel) => void
 }
 
 export default function SetCard (props: Props) {
 
     const handleClick = () => {
+        if(!props.onCardSelection) return
         props.onCardSelection(props.card)
     }
 
@@ -35,7 +37,17 @@ export default function SetCard (props: Props) {
     }
 
     return (
-        <div className='drop-shadow-lg w-[18rem] h-[10rem] flex justify-center bg-gray-300 items-center border-2 border-black rounded-lg hover:bg-gray-400 hover:scale-110 cursor-pointer transition-transform' onClick={handleClick}>
+        <div className={`w-[18rem] h-[10rem] 
+        flex justify-center
+         bg-gray-300 
+         items-center 
+         border-2 
+         border-black rounded-lg 
+         hover:bg-gray-400 
+         hover:scale-110 
+         cursor-pointer 
+         transition-transform
+         ${props.selected ? 'shadow-[0_0_30px_#fde68a]' : ''}`} onClick={handleClick}>
             {
                 toMap.map((_, index) => {
                     return <div key={index} className='mr-1 ml-1'>
